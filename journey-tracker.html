@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Tracker Component</title>
+<!-- Google Fonts for typography -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #0d0e15;
+    --text-primary: #ffffff;
+    --text-secondary: #8892b0;
+    --accent-1: #00f2fe;
+    --accent-2: #4facfe;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Placeholder Sections to enable scrolling */
+  .hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .hero-section h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--accent-1), #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+  }
+
+  .hero-section p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .footer-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Journey Tracker Container */
+  .journey-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .journey-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  /* SVG Path Styles */
+  .path-bg {
+    fill: none;
+    stroke: #2a2d3e;
+    stroke-width: 6;
+    stroke-dasharray: 12 12;
+    stroke-linecap: round;
+  }
+
+  .path-fg {
+    fill: none;
+    stroke: url(#journey-gradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    /* stroke-dashoffset is controlled by GSAP */
+  }
+
+  /* Node (Milestone) Styles */
+  .node {
+    /* Transform origin is center for accurate scaling */
+    transform-origin: center;
+    cursor: pointer;
+  }
+
+  .node-circle-bg {
+    fill: var(--bg-color);
+    stroke: #2a2d3e;
+    stroke-width: 4;
+    transition: stroke 0.3s ease;
+  }
+
+  .node-circle-fg {
+    fill: #00f2fe;
+    transition: transform 0.3s ease;
+    transform-origin: center;
+  }
+
+  .node:hover .node-circle-bg {
+    stroke: #f093fb;
+  }
+
+  .node:hover .node-circle-fg {
+    transform: scale(1.3);
+  }
+
+  .node-text {
+    font-size: 28px;
+    font-weight: 800;
+    fill: var(--text-primary);
+  }
+
+  .node-subtext {
+    font-size: 18px;
+    fill: var(--text-secondary);
+  }
+
+  /* Traveler Icon Styles */
+  .traveler {
+    transform-origin: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- Spacer to force scrolling -->
+<section class="hero-section">
+  <h1>Your Journey Begins</h1>
+  <p>Scroll down to watch the story unfold. This interactive tracker visualizes your milestones dynamically along the path to success.</p>
+</section>
+
+<!-- Main Journey Tracker Component -->
+<section class="journey-container">
+  <!-- 
+    The viewBox coordinate system drives the proportions.
+    If you add more nodes, simply increase the viewBox height (e.g., to 0 0 1200 4000)
+    and extend the 'd' attribute of the paths.
+  -->
+  <svg class="journey-svg" viewBox="0 0 1200 3000" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <!-- Vibrant Gradient for the drawn path -->
+      <linearGradient id="journey-gradient" x1="0" y1="0" x2="0" y2="3000" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#00f2fe" />
+        <stop offset="25%" stop-color="#4facfe" />
+        <stop offset="50%" stop-color="#f093fb" />
+        <stop offset="75%" stop-color="#f5576c" />
+        <stop offset="100%" stop-color="#ff9a9e" />
+      </linearGradient>
+
+      <!-- Glow filter for nodes and traveler -->
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="12" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+
+    <!-- 1. Background Path (The full winding journey) -->
+    <!-- M = Move to, C = Cubic Bezier curve -->
+    <path class="path-bg" id="path-bg" d="
+      M 600, 100 
+      C 1000, 300 1100, 600 800, 800 
+      C 500, 1000 100, 1200 300, 1500 
+      C 500, 1800 1100, 1900 800, 2300 
+      C 500, 2700 400, 2800 600, 2900" 
+    />
+
+    <!-- 2. Foreground Path (The path that draws as you scroll) -->
+    <!-- MUST HAVE THE EXACT SAME 'd' ATTRIBUTE AS path-bg -->
+    <path class="path-fg" id="path-fg" d="
+      M 600, 100 
+      C 1000, 300 1100, 600 800, 800 
+      C 500, 1000 100, 1200 300, 1500 
+      C 500, 1800 1100, 1900 800, 2300 
+      C 500, 2700 400, 2800 600, 2900" 
+    />
+
+    <!-- 3. Goal Markers (Nodes) -->
+    <!-- 
+      To add a new node:
+      1. Copy a <g class="node"> block.
+      2. Set transform="translate(X, Y)" to place it along the path.
+      3. Use text-anchor="end" and negative x coordinates if the node is on the right and you want text on the left.
+    -->
+    
+    <!-- Node 1: Start -->
+    <g class="node" transform="translate(600, 100)">
+      <circle class="node-circle-bg" r="24" />
+      <circle class="node-circle-fg" r="12" filter="url(#glow)" />
+      <text class="node-text" x="50" y="8">Phase 1: Inception</text>
+      <text class="node-subtext" x="50" y="35">Where the vision takes form.</text>
+    </g>
+
+    <!-- Node 2 -->
+    <g class="node" transform="translate(800, 800)">
+      <circle class="node-circle-bg" r="28" />
+      <circle class="node-circle-fg" r="14" filter="url(#glow)" fill="#4facfe" />
+      <text class="node-text" x="-50" y="8" text-anchor="end">Phase 2: Foundation</text>
+      <text class="node-subtext" x="-50" y="35" text-anchor="end">Building the core structure.</text>
+    </g>
+
+    <!-- Node 3 -->
+    <g class="node" transform="translate(300, 1500)">
+      <circle class="node-circle-bg" r="32" />
+      <circle class="node-circle-fg" r="16" filter="url(#glow)" fill="#f093fb" />
+      <text class="node-text" x="55" y="8">Phase 3: Expansion</text>
+      <text class="node-subtext" x="55" y="35">Growing the community.</text>
+    </g>
+
+    <!-- Node 4 -->
+    <g class="node" transform="translate(800, 2300)">
+      <circle class="node-circle-bg" r="36" />
+      <circle class="node-circle-fg" r="18" filter="url(#glow)" fill="#f5576c" />
+      <text class="node-text" x="-60" y="8" text-anchor="end">Phase 4: Optimization</text>
+      <text class="node-subtext" x="-60" y="35" text-anchor="end">Refining for scale and speed.</text>
+    </g>
+
+    <!-- Node 5: End -->
+    <g class="node" transform="translate(600, 2900)">
+      <circle class="node-circle-bg" r="40" />
+      <circle class="node-circle-fg" r="20" filter="url(#glow)" fill="#ff9a9e" />
+      <text class="node-text" x="70" y="8">Phase 5: Zenith</text>
+      <text class="node-subtext" x="70" y="35">Achieving the ultimate goal.</text>
+    </g>
+
+    <!-- 4. Traveler Icon -->
+    <!-- The traveler that animates along the path. 
+         Oriented pointing right (L 24, 0) so autoRotate works natively. -->
+    <g id="traveler" class="traveler">
+      <circle r="30" fill="#ffffff" opacity="0.1" filter="url(#glow)" />
+      <!-- A slick paper plane / arrow shape -->
+      <path d="M -18, -18 L 24, 0 L -18, 18 L -6, 0 Z" fill="#ffffff" filter="url(#glow)" />
+    </g>
+  </svg>
+</section>
+
+<section class="footer-section">
+  <h1>The Journey Continues...</h1>
+  <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.6; font-size: 1.25rem;">
+    Every great journey is a series of milestones. 
+    Keep exploring, keep building, and push towards the next horizon.
+  </p>
+</section>
+
+<!-- Required GSAP Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+    const path = document.querySelector("#path-fg");
+    
+    // Calculate the total length of the SVG path
+    const pathLength = path.getTotalLength();
+
+    // 1. Prepare the path drawing effect
+    // Set dasharray and dashoffset equal to the path length so it's initially hidden
+    gsap.set(path, {
+      strokeDasharray: pathLength,
+      strokeDashoffset: pathLength,
+    });
+
+    // 2. Main Timeline for Path & Traveler
+    // Triggers when the top of the journey container hits the middle of the viewport
+    // Ends when the bottom of the container hits the middle of the viewport
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".journey-container",
+        start: "top center",
+        end: "bottom center",
+        scrub: 1, // 1 second smoothing on the scroll
+      }
+    });
+
+    // Animate the path filling up
+    tl.to(path, {
+      strokeDashoffset: 0,
+      ease: "none",
+    }, 0);
+
+    // Animate the traveler moving along the path simultaneously
+    tl.to("#traveler", {
+      motionPath: {
+        path: "#path-fg",
+        align: "#path-fg",
+        alignOrigin: [0.5, 0.5],
+        autoRotate: true // Keeps the paper plane pointed in the direction of the path
+      },
+      ease: "none",
+    }, 0);
+
+    // 3. Node (Milestone) Animations
+    // Select all markers and animate them when they enter the viewport
+    const nodes = document.querySelectorAll(".node");
+
+    nodes.forEach((node) => {
+      // Set initial hidden state
+      gsap.set(node, { scale: 0, opacity: 0 });
+
+      // Animate in when scrolled into view
+      gsap.to(node, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)", // Bouncy "pop" effect
+        scrollTrigger: {
+          trigger: node,
+          start: "top center+=150", // Triggers when the node is slightly below the center of the screen
+          toggleActions: "play reverse play reverse", // Animates in and out as you scroll past
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
