@@ -8,7 +8,7 @@ const scenes = [
     tapeText: "PHIVE PORTO — ",
     tapeTextClass: "font-black font-sans uppercase tracking-tighter text-black leading-[0.85]",
     tapeStyle: {},
-    videoSrc: "https://gym01.com/wp-content/uploads/2023/08/pexels-pavel-danilyuk-6296580-1080p-1.mp4"
+    videoSrc: "https://assets.mixkit.co/active_storage/video_items/100546/1725385655/100546-video-1080.mp4"
   },
   {
     id: 1,
@@ -16,7 +16,7 @@ const scenes = [
     tapeText: "NEW LIMITS — ",
     tapeTextClass: "font-serif italic font-black uppercase tracking-wider text-transparent leading-[0.85]",
     tapeStyle: { WebkitTextStroke: "2px white" },
-    videoSrc: "https://assets.mixkit.co/active_storage/video_items/100546/1725385655/100546-video-720.mp4"
+    videoSrc: "https://assets.mixkit.co/active_storage/video_items/100549/1725385782/100549-video-1080.mp4"
   },
   {
     id: 2,
@@ -24,9 +24,7 @@ const scenes = [
     tapeText: "STEP INSIDE — ",
     tapeTextClass: "font-black font-sans uppercase tracking-tighter text-black leading-[0.85]",
     tapeStyle: {},
-    // NOTE: Pexels page URLs cannot be used directly in <video src="">. 
-    // Please replace with the direct .mp4 link once downloaded/hosted.
-    videoSrc: "REPLACE_WITH_DIRECT_MP4_LINK_1" 
+    videoSrc: "https://assets.mixkit.co/active_storage/video_items/100551/1725385878/100551-video-1080.mp4"
   },
   {
     id: 3,
@@ -34,7 +32,7 @@ const scenes = [
     tapeText: "KEEP MOVING — ",
     tapeTextClass: "font-serif italic font-black uppercase tracking-wider text-transparent leading-[0.85]",
     tapeStyle: { WebkitTextStroke: "2px white" },
-    videoSrc: "REPLACE_WITH_DIRECT_MP4_LINK_2"
+    videoSrc: "https://assets.mixkit.co/videos/52317/52317-1080.mp4"
   },
   {
     id: 4,
@@ -42,7 +40,7 @@ const scenes = [
     tapeText: "STAY HYDRATED — ",
     tapeTextClass: "font-black font-sans uppercase tracking-tighter text-black leading-[0.85]",
     tapeStyle: {},
-    videoSrc: "REPLACE_WITH_DIRECT_MP4_LINK_3"
+    videoSrc: "https://assets.mixkit.co/videos/52112/52112-1080.mp4"
   }
 ];
 

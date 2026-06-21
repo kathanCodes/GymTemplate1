@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import GlitchText from './GlitchText';
 
 const Clubs = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -30,7 +31,7 @@ const Clubs = () => {
         <div className="flex flex-col gap-16">
           <div>
             <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none">
-              The Sanctuaries
+              <GlitchText text="The Sanctuaries" interval={4000} jitter={3000} />
             </h2>
             <p className="text-xl text-gray-400 mt-6 font-medium max-w-md">
               Architectural brutalism meets high-performance engineering. Select a location.

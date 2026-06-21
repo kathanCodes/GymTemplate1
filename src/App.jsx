@@ -8,10 +8,12 @@ import Classes from './components/Classes';
 import Memberships from './components/Memberships';
 import Clubs from './components/Clubs';
 import Footer from './components/Footer';
+import Preloader from './components/Preloader';
 
 function App() {
   return (
     <div className="bg-black text-white min-h-screen font-sans selection:bg-[#DFFF00] selection:text-black relative">
+      <Preloader />
       {/* Absolute/Fixed Parallax Element spanning across scroll */}
       <FloatingPlate />
       

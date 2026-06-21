@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import GlitchText from './GlitchText';
 
 const Memberships = () => {
   const [billing, setBilling] = useState('monthly');
@@ -31,7 +32,7 @@ const Memberships = () => {
         {/* Header */}
         <div className="flex flex-col items-center mb-24 text-center">
           <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-10 leading-none">
-            Ascend Your Tier
+            <GlitchText text="Ascend Your Tier" interval={4500} jitter={2000} />
           </h2>
           
           {/* Framer Motion Toggle Button */}

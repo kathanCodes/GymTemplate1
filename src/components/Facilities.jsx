@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import GlitchText from './GlitchText';
 
 const Facilities = () => {
   const facilities = [
@@ -30,7 +31,7 @@ const Facilities = () => {
     <section className="bg-black py-24 md:py-32 px-6 md:px-12 lg:px-24">
       <div className="mb-16">
         <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-          The Arsenal
+          <GlitchText text="The Arsenal" interval={2800} jitter={2000} />
         </h2>
         <p className="text-gray-400 mt-6 text-xl md:text-2xl max-w-2xl font-medium">
           World-class zones meticulously engineered for ultimate output and rapid regeneration.
