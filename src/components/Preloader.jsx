@@ -80,14 +80,14 @@ const Preloader = () => {
                   initial={{ x: 0 }}
                   exit={{ x: '-100vw' }}
                   transition={{ duration: tape.duration, ease: [0.76, 0, 0.24, 1], delay: tape.delay }}
-                  className="absolute right-1/2 w-[100vw] h-12 md:h-20 shadow-[0_0_50px_rgba(234,179,8,0.2)] z-20"
+                  className="absolute right-1/2 w-[100vw] h-12 md:h-20 shadow-[0_0_50px_rgba(223,255,0,0.2)] z-20"
                   style={{ 
-                    background: 'repeating-linear-gradient(45deg, #eab308 0, #eab308 40px, #000000 40px, #000000 80px)',
+                    background: 'repeating-linear-gradient(45deg, #DFFF00 0, #DFFF00 40px, #000000 40px, #000000 80px)',
                     clipPath: 'polygon(0 0, 100% 0, 97% 10%, 100% 30%, 98% 50%, 100% 70%, 96% 90%, 100% 100%, 0 100%)' // jagged tear on right
                   }}
                 >
                   <div className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16">
-                     <span className="bg-black text-[#eab308] font-black text-xl md:text-3xl tracking-[0.15em] px-4 py-1 italic border-2 border-[#eab308] shadow-lg whitespace-nowrap">
+                     <span className="bg-black text-[#DFFF00] font-black text-xl md:text-3xl tracking-[0.15em] px-4 py-1 italic border-2 border-[#DFFF00] shadow-lg whitespace-nowrap">
                        {tape.quoteLeft}
                      </span>
                   </div>
@@ -98,14 +98,14 @@ const Preloader = () => {
                   initial={{ x: 0 }}
                   exit={{ x: '100vw' }}
                   transition={{ duration: tape.duration, ease: [0.76, 0, 0.24, 1], delay: tape.delay }}
-                  className="absolute left-1/2 w-[100vw] h-12 md:h-20 shadow-[0_0_50px_rgba(234,179,8,0.2)] z-20"
+                  className="absolute left-1/2 w-[100vw] h-12 md:h-20 shadow-[0_0_50px_rgba(223,255,0,0.2)] z-20"
                   style={{ 
-                    background: 'repeating-linear-gradient(45deg, #000000 0, #000000 40px, #eab308 40px, #eab308 80px)',
+                    background: 'repeating-linear-gradient(45deg, #000000 0, #000000 40px, #DFFF00 40px, #DFFF00 80px)',
                     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 3% 90%, 0 70%, 2% 50%, 0 30%, 4% 10%)' // jagged tear on left
                   }}
                 >
                   <div className="absolute inset-0 flex items-center justify-start pl-8 md:pl-16">
-                     <span className="bg-[#eab308] text-black font-black text-xl md:text-3xl tracking-[0.15em] px-4 py-1 italic border-2 border-black shadow-lg whitespace-nowrap">
+                     <span className="bg-[#DFFF00] text-black font-black text-xl md:text-3xl tracking-[0.15em] px-4 py-1 italic border-2 border-black shadow-lg whitespace-nowrap">
                        {tape.quoteRight}
                      </span>
                   </div>
